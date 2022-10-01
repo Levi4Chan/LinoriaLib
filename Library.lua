@@ -943,8 +943,8 @@ do
         end);
 
         Library:GiveSignal(InputService.InputBegan:Connect(function(Input)
-            if (not Picking) then
-                if not InputService:GetFocusedTextBox() then
+            if (not InputService:GetFocusedTextBox()) then
+                if (not Picking) then
                     if KeyPicker.Mode == 'Toggle' then
                         local Key = KeyPicker.Value;
                             if Key == 'MB1' or Key == 'MB2' then
@@ -960,9 +960,8 @@ do
                                 end;
                             end;
                     end;
-                end;
-
                 KeyPicker:Update();
+                end;
             end;
 
             if Input.UserInputType == Enum.UserInputType.MouseButton1 then
@@ -977,9 +976,11 @@ do
         end))
 
         Library:GiveSignal(InputService.InputEnded:Connect(function(Input)
-            if (not Picking) then
-                KeyPicker:Update();
-            end;
+            if (not InputService:GetFocusedTextBox()) then
+                if (not Picking) then
+                    KeyPicker:Update();
+                end;
+            end
         end))
 
         KeyPicker:Update();
