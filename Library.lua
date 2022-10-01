@@ -946,17 +946,18 @@ do
             if (not Picking) then
                 if KeyPicker.Mode == 'Toggle' then
                     local Key = KeyPicker.Value;
-
-                    if Key == 'MB1' or Key == 'MB2' then
-                        if Key == 'MB1' and Input.UserInputType == Enum.UserInputType.MouseButton1
-                        or Key == 'MB2' and Input.UserInputType == Enum.UserInputType.MouseButton2 then
-                            KeyPicker.Toggled = not KeyPicker.Toggled
-                            KeyPicker:DoClick()
-                        end;
-                    elseif Input.UserInputType == Enum.UserInputType.Keyboard then
-                        if Input.KeyCode.Name == Key then
-                            KeyPicker.Toggled = not KeyPicker.Toggled;
-                            KeyPicker:DoClick()
+                    if not InputService:GetFocusedTextBox() then
+                        if Key == 'MB1' or Key == 'MB2' then
+                            if Key == 'MB1' and Input.UserInputType == Enum.UserInputType.MouseButton1
+                            or Key == 'MB2' and Input.UserInputType == Enum.UserInputType.MouseButton2 then
+                                KeyPicker.Toggled = not KeyPicker.Toggled
+                                KeyPicker:DoClick()
+                            end;
+                        elseif Input.UserInputType == Enum.UserInputType.Keyboard then
+                            if Input.KeyCode.Name == Key then
+                                KeyPicker.Toggled = not KeyPicker.Toggled;
+                                KeyPicker:DoClick()
+                            end;
                         end;
                     end;
                 end;
